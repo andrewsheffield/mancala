@@ -19,7 +19,7 @@ public class GoalShape extends JPanel {
     
     private int bucketWidth;
     private int bucketHeight;
-    boolean toggle = true;
+    boolean toggle = false;
     
     
     public GoalShape(int w, int h) {
@@ -49,4 +49,7 @@ public class GoalShape extends JPanel {
         toggle = !toggle;
     }
 
+    public void resetToggle() {
+        toggle = false;
+    }
 }
