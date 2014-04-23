@@ -7,13 +7,15 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MainView {
     
     public final JPanel board;
-    public final double SCALE = 1.0;
+    public final double SCALE = 1.5;
     
     public MainView(/*datatype model*/) {
         
@@ -36,6 +38,7 @@ public class MainView {
         board.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
+        
         JPanel goal1 = new JPanel();
         goal1.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(200 * SCALE)));
         
@@ -44,20 +47,44 @@ public class MainView {
         c.gridx = 0;
         c.gridheight = 2;
         goal1.setLayout(new GridLayout());
-        goal1.add(new GoalShape(100, 200));
+        
+        final JPanel circle = new GoalShape((int)(100 * SCALE), (int)(200 * SCALE));
+        circle.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                circle.repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+        
+        goal1.add(circle);
         board.add(goal1, c);
         
         for (int i = 0; i < 12; i++) {
             JPanel bucket = new JPanel();
             bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(100 * SCALE)));
-            bucket.setBackground(Color.blue);
+            //bucket.setBackground(Color.blue);
             c.gridheight = 1;
             c.gridx = i + 1;
             c.gridy = 0;
+            bucket.setLayout(new GridLayout());
+            bucket.add(new GoalShape((int)(100 * SCALE), (int)(100 * SCALE)));
             if (i > 5) {
                 c.gridx = i - 5;
                 c.gridy = 1;
-                bucket.setBackground(Color.yellow);
+                
             }
             board.add(bucket, c);
         }
@@ -69,7 +96,7 @@ public class MainView {
         c.gridy = 0;
         c.gridx = 7;
         goal2.setLayout(new GridLayout());
-        goal2.add(new GoalShape(100, 200));
+        goal2.add(new GoalShape((int)(100 * SCALE), (int)(200 * SCALE)));
         board.add(goal2, c);
     }
     
