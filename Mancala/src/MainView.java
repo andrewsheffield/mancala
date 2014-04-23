@@ -1,9 +1,5 @@
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -21,20 +17,17 @@ public class MainView {
         
         board = new JPanel();
         board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(200 * SCALE)));
-        
         setupBoard(board);
         
         JFrame frame =  new JFrame();
-        
         frame.add(board);
-        
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    private void setupBoard(JPanel board) {
+    private void setupBoard(final JPanel board) {
         board.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
@@ -48,15 +41,17 @@ public class MainView {
         c.gridheight = 2;
         goal1.setLayout(new GridLayout());
         
-        final JPanel circle = new GoalShape((int)(100 * SCALE), (int)(200 * SCALE));
-        circle.addMouseListener(new MouseListener() {
+        final GoalShape goalCircle1 = new GoalShape((int)(100 * SCALE), (int)(200 * SCALE));
+        goalCircle1.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {}
 
             @Override
             public void mousePressed(MouseEvent e) {
-                circle.repaint();
+                goalCircle1.toggle();
+                board.revalidate();
+                board.repaint();
             }
 
             @Override
@@ -69,18 +64,41 @@ public class MainView {
             public void mouseExited(MouseEvent e) {}
         });
         
-        goal1.add(circle);
+        goal1.add(goalCircle1);
         board.add(goal1, c);
         
         for (int i = 0; i < 12; i++) {
             JPanel bucket = new JPanel();
             bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(100 * SCALE)));
-            //bucket.setBackground(Color.blue);
             c.gridheight = 1;
             c.gridx = i + 1;
             c.gridy = 0;
             bucket.setLayout(new GridLayout());
-            bucket.add(new GoalShape((int)(100 * SCALE), (int)(100 * SCALE)));
+            
+            final GoalShape bucketCircle = new GoalShape((int)(100 * SCALE), (int)(100 * SCALE));
+                bucketCircle.addMouseListener(new MouseListener() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {}
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    bucketCircle.toggle();
+                    board.revalidate();
+                    board.repaint();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {}
+
+                @Override
+                public void mouseEntered(MouseEvent e) {}
+
+                @Override
+                public void mouseExited(MouseEvent e) {}
+            });
+            
+            bucket.add(bucketCircle);
             if (i > 5) {
                 c.gridx = i - 5;
                 c.gridy = 1;
@@ -96,7 +114,32 @@ public class MainView {
         c.gridy = 0;
         c.gridx = 7;
         goal2.setLayout(new GridLayout());
-        goal2.add(new GoalShape((int)(100 * SCALE), (int)(200 * SCALE)));
+        final GoalShape goalCircle2 = new GoalShape((int)(100 * SCALE), (int)(200 * SCALE));
+        goalCircle2.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                goalCircle2.toggle();
+                board.revalidate();
+                board.repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+        
+        goal2.add(goalCircle2);
+        
+        
         board.add(goal2, c);
     }
     
