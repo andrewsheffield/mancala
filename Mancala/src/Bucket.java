@@ -15,14 +15,14 @@ import javax.swing.JPanel;
  *
  * @author sheff
  */
-public class GoalShape extends JPanel {
+public class Bucket extends JPanel {
     
     private int bucketWidth;
     private int bucketHeight;
-    boolean toggle = false;
+    private boolean selected = false;
     
     
-    public GoalShape(int w, int h) {
+    public Bucket(int w, int h) {
         bucketWidth = w;
         bucketHeight = h;
         setPreferredSize(new Dimension(w, h));
@@ -35,7 +35,7 @@ public class GoalShape extends JPanel {
         
         final Ellipse2D.Double circle = new Ellipse2D.Double(0, 0, bucketWidth, bucketHeight);
         
-        if (toggle) {
+        if (selected) {
             g2.setPaint(Color.blue);
         } else {
             g2.setPaint(Color.red);
@@ -45,11 +45,15 @@ public class GoalShape extends JPanel {
         g2.draw(circle);
     }
     
-    public void toggle() {
-        toggle = !toggle;
+    public void select() {
+        selected = !selected;
+    }
+    
+    public boolean isSelected() {
+        return selected;
     }
 
-    public void resetToggle() {
-        toggle = false;
+    public void resetSelection() {
+        selected = false;
     }
 }

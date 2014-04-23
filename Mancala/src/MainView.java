@@ -14,7 +14,7 @@ public class MainView {
     
     public final JPanel board;
     public final double SCALE = 1.5;
-    private ArrayList<GoalShape> buckets = new ArrayList<>();
+    private ArrayList<Bucket> buckets = new ArrayList<>();
     
     public MainView(/*datatype model*/) {
         
@@ -40,7 +40,7 @@ public class MainView {
             
             JPanel bucket = new JPanel();
             bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(100 * SCALE)));
-            final GoalShape bucketCircle;
+            final Bucket bucketCircle;
             
             
             if (i == 0) {
@@ -48,24 +48,24 @@ public class MainView {
                 c.gridx = 0;
                 c.gridy = 0;
                 bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(200 * SCALE)));
-                bucketCircle = new GoalShape((int)(100 * SCALE), (int)(200 * SCALE));
+                bucketCircle = new Bucket((int)(100 * SCALE), (int)(200 * SCALE));
             } else if(i == 13) {
                 c.gridheight = 2;
                 c.gridy = 0;
                 c.gridx = 7;
                 bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(200 * SCALE)));
                 bucket.setBackground(Color.green);
-                bucketCircle = new GoalShape((int)(100 * SCALE), (int)(200 * SCALE));
+                bucketCircle = new Bucket((int)(100 * SCALE), (int)(200 * SCALE));
             } else if (i > 6) {
                 c.gridheight = 1;
                 c.gridx = i - 6;
                 c.gridy = 1 ;
-                bucketCircle = new GoalShape((int)(100 * SCALE), (int)(100 * SCALE));
+                bucketCircle = new Bucket((int)(100 * SCALE), (int)(100 * SCALE));
             } else {
                 c.gridheight = 1;
                 c.gridx = i;
                 c.gridy = 0;
-                bucketCircle = new GoalShape((int)(100 * SCALE), (int)(100 * SCALE));
+                bucketCircle = new Bucket((int)(100 * SCALE), (int)(100 * SCALE));
             }
             
             
@@ -76,8 +76,13 @@ public class MainView {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    resetBucketToggle();
-                    bucketCircle.toggle();
+                    
+                    if (bucketCircle.isSelected()) {
+                        resetBucketSelections();
+                    } else {
+                        resetBucketSelections();
+                        bucketCircle.select();
+                    }
                     board.revalidate();
                     board.repaint();
                 }
@@ -99,9 +104,9 @@ public class MainView {
         }
     }
     
-    private void resetBucketToggle() {
-        for (GoalShape g : buckets) {
-            g.resetToggle();
+    private void resetBucketSelections() {
+        for (Bucket g : buckets) {
+            g.resetSelection();
         }
     }
     
