@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainView {
@@ -15,11 +16,12 @@ public class MainView {
     public final JPanel board;
     public final double SCALE = 1.5;
     private ArrayList<Bucket> buckets = new ArrayList<>();
+    private final JLabel currentPlayer = new JLabel();
     
     public MainView(/*datatype model*/) {
         
         board = new JPanel();
-        board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(200 * SCALE)));
+        board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(250 * SCALE)));
         setupBoard(board);
         
         JFrame frame =  new JFrame();
@@ -101,6 +103,12 @@ public class MainView {
             bucket.add(bucketCircle);
             board.add(bucket, c);
             buckets.add(bucketCircle);
+            
+            currentPlayer.setText("Player One's Turn");
+            c.gridx = 0;
+            c.gridy = 3;
+            c.ipady = 10;
+            board.add(currentPlayer, c);
         }
     }
     
