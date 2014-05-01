@@ -1,19 +1,12 @@
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class MainView {
     
     public final JPanel board;
+    public final JPanel window;
     public final double SCALE = 1.5;
     private ArrayList<Bucket> buckets = new ArrayList<>();
     private final JLabel currentPlayer = new JLabel();
@@ -22,56 +15,57 @@ public class MainView {
         
         board = new JPanel();
         board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(250 * SCALE)));
-        setupBoard(board);
+        setupBoard();
+        
+        window = new JPanel();
+        window.setLayout(new BorderLayout());
+       
+        window.add(board, BorderLayout.CENTER);
         
         JFrame frame =  new JFrame();
-        frame.add(board);
+        frame.add(window);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    private void setupBoard(final JPanel board) {
+    private void setupBoard() {
         
         board.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         
+        
+        
         for (int i = 0; i < 14; i++) {
-            
-            JPanel bucket = new JPanel();
-            bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(100 * SCALE)));
-            final Bucket bucketCircle;
+            final Bucket bucket;
             
             
             if (i == 0) {
                 c.gridheight = 2;
                 c.gridx = 0;
                 c.gridy = 0;
-                bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(200 * SCALE)));
-                bucketCircle = new Bucket((int)(100 * SCALE), (int)(200 * SCALE));
+                bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), 4);
             } else if(i == 13) {
                 c.gridheight = 2;
                 c.gridy = 0;
                 c.gridx = 7;
-                bucket.setPreferredSize(new Dimension((int)(100 * SCALE), (int)(200 * SCALE)));
-                bucket.setBackground(Color.green);
-                bucketCircle = new Bucket((int)(100 * SCALE), (int)(200 * SCALE));
+                bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), 5);
             } else if (i > 6) {
                 c.gridheight = 1;
                 c.gridx = i - 6;
                 c.gridy = 1 ;
-                bucketCircle = new Bucket((int)(100 * SCALE), (int)(100 * SCALE));
+                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), 3);
             } else {
                 c.gridheight = 1;
                 c.gridx = i;
                 c.gridy = 0;
-                bucketCircle = new Bucket((int)(100 * SCALE), (int)(100 * SCALE));
+                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), 2);
             }
             
             
-            bucketCircle.addMouseListener(new MouseListener() {
+            bucket.addMouseListener(new MouseListener() {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {}
@@ -79,11 +73,11 @@ public class MainView {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     
-                    if (bucketCircle.isSelected()) {
+                    if (bucket.isSelected()) {
                         resetBucketSelections();
                     } else {
                         resetBucketSelections();
-                        bucketCircle.select();
+                        bucket.select();
                     }
                     board.revalidate();
                     board.repaint();
@@ -98,13 +92,14 @@ public class MainView {
                 @Override
                 public void mouseExited(MouseEvent e) {}
             });
+
+            bucket.add(new JLabel("Testing"));
             
-            bucket.setLayout(new GridLayout());
-            bucket.add(bucketCircle);
             board.add(bucket, c);
-            buckets.add(bucketCircle);
+            buckets.add(bucket);
             
             currentPlayer.setText("Player One's Turn");
+            currentPlayer.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
             c.gridx = 0;
             c.gridy = 3;
             c.ipady = 10;

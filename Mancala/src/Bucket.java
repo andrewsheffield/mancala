@@ -1,16 +1,6 @@
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author sheff
@@ -20,13 +10,15 @@ public class Bucket extends JPanel {
     private int bucketWidth;
     private int bucketHeight;
     private boolean selected = false;
+    private int numOfMarbles = 0;
     
     
-    public Bucket(int w, int h) {
+    public Bucket(int w, int h, int marbles) {
         bucketWidth = w;
         bucketHeight = h;
         setPreferredSize(new Dimension(w, h));
         this.setLocation(0, 0);
+        numOfMarbles = marbles;
     }
     
     @Override
@@ -43,6 +35,16 @@ public class Bucket extends JPanel {
         
         g2.fill(circle);
         g2.draw(circle);
+        
+        g2.setPaint(Color.BLACK);
+        final Ellipse2D.Double marble = new Ellipse2D.Double(0, 20, 20, 20);
+        for (int i = 0; i < numOfMarbles; i++) {
+            marble.x = (i * marble.width) + 20;
+            g2.fill(marble);
+            g2.draw(marble);
+        }
+
+        
     }
     
     public void select() {
