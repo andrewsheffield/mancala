@@ -74,12 +74,12 @@ public class Data
 	
 	public int move(int pitNumber) {
 		int stonesToDistribute = board.get(pitNumber);
+		if(stonesToDistribute > 0) {
 		board.set(pitNumber,0);
 		pitNumber++;
-		while(stonesToDistribute > 0){
-
+		while(stonesToDistribute != 0){
 			if(isPlayerA && pitNumber == MANCALA_INDEX_A){
-				System.out.println("set the mancala a to " + (board.get(pitNumber)+1));
+				System.out.println("set mancala A to " + (board.get(pitNumber)+1));
 				board.set(pitNumber,board.get(pitNumber)+1);
 				stonesToDistribute--;
 			}else if(!isPlayerA && pitNumber == MANCALA_INDEX_B){
@@ -92,12 +92,17 @@ public class Data
 			}	
 			
 			if(pitNumber == 13) {
+				if(stonesToDistribute == 0 && isPlayerA) {
+					return 13;
+				}
 				pitNumber = -1;
 			}
 			pitNumber++;
 		}
-			
-		return pitNumber;
+		
+		return pitNumber-1;
+		} else
+			return -1;
 	}
 
 	/**
@@ -127,6 +132,24 @@ public class Data
   public void removeAllStonesFromPit(int index) 
   {
 	  board.set(index, 0);
+  }
+  
+  public ArrayList<Integer> getPitsB()
+  {
+	  ArrayList<Integer> b = new ArrayList<Integer>(); 
+	  for(int i = 5 ; i >= 0; i--) {
+	    	b.add(board.get(i));    	    	
+  	}
+	  return b;
+  }
+  
+  public ArrayList<Integer> getPitsA() 
+  {
+	  ArrayList<Integer> a = new ArrayList<Integer>(); 
+	  for(int i = 7 ; i < 13; i++) {
+	    	a.add(board.get(i));    	    	
+  	}
+	  return a;
   }
   
   public int checkWinState() 

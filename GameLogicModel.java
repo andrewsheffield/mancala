@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.omg.CORBA.DynAnyPackage.InvalidValue;
 
 /**
@@ -9,20 +11,132 @@ import org.omg.CORBA.DynAnyPackage.InvalidValue;
  */
 public class GameLogicModel 
 {
-	private int undoCounterA; 
-	private int undoCounterB; 
+	public int undoCounterA; 
+	public int undoCounterB; 
 
 	public static void main(String[] args) throws InvalidValue 
 	{
+		/*
 		GameLogicModel tmp = new GameLogicModel(3);
 		tmp.data.printBoard();
-		tmp.makeMove(7); // player A picks A1 
+		tmp.makeMove(10); 
 		tmp.data.printBoard();
-		tmp.undo(); // reverts back to player A and board to previous state 
+		tmp.makeMove(11); 
 		tmp.data.printBoard();
-		tmp.makeMove(12); // player A picks A6 
+		tmp.makeMove(0); 
 		tmp.data.printBoard();
-
+		tmp.makeMove(8); 
+		tmp.data.printBoard();
+		tmp.makeMove(0); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(9); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(10); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(2); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(3); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(11); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(4); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(7); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(5); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(7); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(0); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(8); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(11); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(1); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(7); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(2); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(7); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(3); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(7); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(4); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(7); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		
+		tmp.makeMove(5); 
+		tmp.data.printBoard();
+		System.out.println("checkWinState " + tmp.checkWinState());
+		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
+		*/
 	}
 	
 	public Data data; 
@@ -44,6 +158,13 @@ public class GameLogicModel
 		prevoiusData = data;
 	}
 	
+	/**
+	 * This is the main function that is used to play the game it checks 
+	 * all of the rules and will throw an exception if wrong pits are 
+	 * selected on wrong turns
+	 * @param pitIndex
+	 * @throws InvalidValue
+	 */
 	public void makeMove(int pitIndex) throws InvalidValue 
 	{
 		prevoiusData = data.DeepCopy();
@@ -58,26 +179,112 @@ public class GameLogicModel
 		
 		int endingIndex = data.move(pitIndex);
 		
+		System.out.println("endingIndex is " + endingIndex);
 		// steal stones from pit 
 		checkIfPitWasEmpty(endingIndex); 
 		
-		data.isPlayerA = !data.isPlayerA;
-
 		// give player A another turn
 		if(data.isPlayerA && endingIndex == data.MANCALA_INDEX_A)
 		{
 			data.isPlayerA = true;
-		}
-		
-		// give player B another turn
-		if(!data.isPlayerA && endingIndex == data.MANCALA_INDEX_B)
+		} else if(!data.isPlayerA && endingIndex == data.MANCALA_INDEX_B)
 		{
 			data.isPlayerA = false;
+		} else {
+			data.isPlayerA = !data.isPlayerA;
+		}
+
+	}
+	/**
+	 * Will revert back the the previous known turn each player 
+	 * is allows 3 undo clicks after that no matter how many 
+	 * times the undo is pressed nothing will occur. 
+	 */
+	public void undo()
+	{
+		if(data.isPlayerA && undoCounterA < 3) {
+			undoCounterA++;
+			data = prevoiusData;
 		}
 		
+		if(!data.isPlayerA && undoCounterB < 3) {
+			undoCounterB++;
+			data = prevoiusData;
+		}
 	}
 	
+	/**
+	 * If player A won returns 1
+	 * if player B won returns -1
+	 * if tie return 0
+	 * if in progress returns 6969 
+	 * @return 1,0,-1, 6969 check win state of player A, none, B, in progress
+	 */
+	public int checkWinState()
+	{
+		if(data.checkWinState() != 0)
+		{
+			int mA = getMancalaA(); 
+			int mB = getMancalaB(); 
+			if(mA > mB)
+				return 1;
+			else if(mB > mA)
+				return -1;
+			else 
+				return 0;
+		}
+		return 6969;
+	}
 	
+	/**
+	 * returns an array list in the order of display 
+	 * for player B: B6,B5,B4,B3,B2,B1 
+	 * @return arrayList on integer representing pits of B  
+	 */
+	public ArrayList<Integer> getPlayerBPitsA() 
+	{
+		return data.getPitsA();
+	}
+	
+	/**
+	 * returns an array list in the order of display 
+	 * for player B: B6,B5,B4,B3,B2,B1 
+	 * @return arrayList on integer representing pits of B  
+	 */
+	public ArrayList<Integer> getPlayerPitsB() 
+	{
+		return data.getPitsB();
+	}
+	
+	/**
+	 * @return number of stones in player A mancala 
+	 */
+	public int getMancalaA()
+	{
+		return data.getStoneInPit(data.MANCALA_INDEX_A);
+	}
+	
+	/**
+	 * @return number of stones in player B mancala 
+	 */
+	public int getMancalaB()
+	{
+		return data.getStoneInPit(data.MANCALA_INDEX_B);
+	}
+	
+	/**
+	 * Returns true if is player A turn
+	 * @return
+	 */
+	public boolean checkTurnPlayerA() {
+		return data.isPlayerA; 
+	}
+	
+	/**
+	 * Helper Function of make move 
+	 * @param pitIndex
+	 * @return
+	 */
 	private boolean checkIfValidMove(int pitIndex)
 	{
 		if(data.isPlayerA && pitIndex >=0 && pitIndex <=6 )
@@ -89,12 +296,13 @@ public class GameLogicModel
 	}
 	
 	/**
-	 * This function checks if a pit was empty and 
+	 * This function checks if a pit was empty and steels 
+	 * 
 	 * @param endingIndex
 	 */
 	private void checkIfPitWasEmpty(int endingIndex) 
 	{
-		if(data.isPlayerA && endingIndex >=0 && endingIndex <=6 
+		if(data.isPlayerA && endingIndex >=7 && endingIndex <=12 
 				&& data.getStoneInPit(endingIndex) == 1) {
 			// steal stones from pit B add to mancala A
 			int adjIndex = getAdjacentIndex(endingIndex);
@@ -103,53 +311,26 @@ public class GameLogicModel
 			data.addStonesToMancala(stoneForMancal);
 		}
 		
-		if(!data.isPlayerA && endingIndex >=7 && endingIndex <=12
+		if(!data.isPlayerA && endingIndex >=0 && endingIndex <=5
 				&& data.getStoneInPit(endingIndex) == 1) {
 			// steal stones from pit A add to mancala B
 			int adjIndex = getAdjacentIndex(endingIndex);
+			System.out.println("adj index " + adjIndex + " " + endingIndex);
 			int stoneForMancal = data.getStoneInPit(adjIndex);
 			data.removeAllStonesFromPit(adjIndex);
 			data.addStonesToMancala(stoneForMancal);
 				}
 	}
 	
-	private int getAdjacentIndex(int endingIndex) 
-	{
-		if(endingIndex >=0 && endingIndex <=6)
-			return endingIndex +7;
-		else
-			return endingIndex -7;
-	}
-	
 	/**
-	 * Returns true if is player A turn
+	 * adjusts the index to find the corresponding index to 
+	 * steal from. 
+	 * @param endingIndex
 	 * @return
 	 */
-	public boolean checkTurnPlayerA() {
-		return data.isPlayerA; 
+	private int getAdjacentIndex(int endingIndex) 
+	{
+			return 12 - endingIndex ;
 	}
 	
-	public void undo()
-	{
-		if(data.isPlayerA && undoCounterA < 4) {
-			undoCounterA++;
-			data = prevoiusData;
-		}
-		
-		if(!data.isPlayerA && undoCounterB < 4) {
-			undoCounterB++;
-			data = prevoiusData;
-		}
-	}
-	
-	/**
-	 * If player A won returns 1
-	 * if player B won returns -1
-	 * else it returns a 0 
-	 * @return 1,0,-1 check win state of player A, none, B 
-	 */
-	public int checkWinState()
-	{
-		return data.checkWinState();
-	}
 }
