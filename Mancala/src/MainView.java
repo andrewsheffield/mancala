@@ -62,7 +62,7 @@ public class MainView {
                 c.gridheight = 1;
                 c.gridx = i - 6;
                 c.gridy = 1 ;
-                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), model.getPlayerBPitsA().get(i-7));
+                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), model.getPlayerPitsA().get(i-7));
                 bucket.setName(i + "");
             } else {
                 c.gridheight = 1;
@@ -115,7 +115,12 @@ public class MainView {
             buckets.add(bucket);
             
             currentPlayer.removeAll();
-            if (model.checkTurnPlayerA()) {
+            if (model.checkWinState() == 1) {
+                currentPlayer.setText("Player One Wins!!!!!!!!!!!");
+            } else if (model.checkWinState() == -1) {
+                currentPlayer.setText("Player two Wins!!!!!!!!!!!");
+            }
+            else if (model.checkTurnPlayerA()) {
                 currentPlayer.setText("Player One's Turn");
             } else {
                 currentPlayer.setText("Player Two's Turn");

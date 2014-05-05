@@ -118,7 +118,7 @@ public class GameLogicModel
 	 * for player B: B6,B5,B4,B3,B2,B1 
 	 * @return arrayList on integer representing pits of B  
 	 */
-	public ArrayList<Integer> getPlayerBPitsA() 
+	public ArrayList<Integer> getPlayerPitsA() 
 	{
 		return data.getPitsA();
 	}
