@@ -2,20 +2,24 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.omg.CORBA.DynAnyPackage.InvalidValue;
 
 public class MainView {
     
+    public GameLogicModel model;
     public final JPanel board;
     public final JPanel window;
     public final double SCALE = 1.5;
     private ArrayList<Bucket> buckets = new ArrayList<>();
     private final JLabel currentPlayer = new JLabel();
     
-    public MainView(/*datatype model*/) {
+    public MainView() {
         
         board = new JPanel();
         board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(250 * SCALE)));
-        setupBoard();
+        //setupBoard();
         
         window = new JPanel();
         window.setLayout(new BorderLayout());
@@ -30,12 +34,12 @@ public class MainView {
         frame.setVisible(true);
     }
 
-    private void setupBoard() {
-        
+    public void setupBoard() {
+        board.removeAll();
         board.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
-        
+
         
         
         for (int i = 0; i < 14; i++) {
@@ -46,26 +50,26 @@ public class MainView {
                 c.gridheight = 2;
                 c.gridx = 0;
                 c.gridy = 0;
-                bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), 4);
-                bucket.setName("M1");
+                bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), model.getMancalaB());
+                bucket.setName("6");
             } else if(i == 13) {
                 c.gridheight = 2;
                 c.gridx = 7;
                 c.gridy = 0;
-                bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), 5);
-                bucket.setName("M2");
+                bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), model.getMancalaA());
+                bucket.setName("13");
             } else if (i > 6) {
                 c.gridheight = 1;
                 c.gridx = i - 6;
                 c.gridy = 1 ;
-                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), 3);
-                bucket.setName("B" + (i - 6));
+                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), model.getPlayerBPitsA().get(i-7));
+                bucket.setName(i + "");
             } else {
                 c.gridheight = 1;
                 c.gridx = i;
                 c.gridy = 0;
-                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), 2);
-                bucket.setName("A" + i);
+                bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), model.getPlayerPitsB().get(i-1));
+                bucket.setName((6-i) + "");
             }
             
             
@@ -76,12 +80,18 @@ public class MainView {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    
+                    /*
                     if (bucket.isSelected()) {
                         resetBucketSelections();
                     } else {
                         resetBucketSelections();
                         bucket.select();
+                    }
+                    */
+                    try {
+                        model.makeMove(Integer.parseInt(bucket.getName()));
+                    } catch (InvalidValue ex) {
+                        JOptionPane.showMessageDialog(board, "Not your turn!  Calm yo Tits!");
                     }
                     board.revalidate();
                     board.repaint();
@@ -104,16 +114,18 @@ public class MainView {
             board.add(bucket, c);
             buckets.add(bucket);
             
-            currentPlayer.setText("Player One's Turn");
+            currentPlayer.removeAll();
+            if (model.checkTurnPlayerA()) {
+                currentPlayer.setText("Player One's Turn");
+            } else {
+                currentPlayer.setText("Player Two's Turn");
+            }
+            
             currentPlayer.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
             c.gridx = 0;
             c.gridy = 3;
             c.ipady = 10;
             board.add(currentPlayer, c);
-        }
-        
-        for (Bucket b : buckets) {
-            System.out.println(b.getName());
         }
     }
     
@@ -121,6 +133,14 @@ public class MainView {
         for (Bucket g : buckets) {
             g.resetSelection();
         }
+    }
+    
+    public void runView() {
+        setupBoard();
+    }
+
+    void setData(GameLogicModel model) {
+        this.model = model;
     }
     
 }

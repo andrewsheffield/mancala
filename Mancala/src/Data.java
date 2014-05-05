@@ -16,7 +16,8 @@ public class Data
 	// size of board 
 	public int SIZE = 14; 
 	public int MANCALA_INDEX_A = 13; 
-	public int MANCALA_INDEX_B = 6; 
+	public int MANCALA_INDEX_B = 6;
+        public int numberOfStones;
 	public boolean isPlayerA; 
 
 	/**
@@ -31,6 +32,7 @@ public class Data
 		board = new ArrayList<Integer>(SIZE);
 		setStones(numOfStones);
 		isPlayerA = true;
+                numberOfStones = numOfStones;
 	}
 	
 	public Data() {
@@ -39,7 +41,7 @@ public class Data
 
 	public Data DeepCopy() 
 	{
-		Data tmp = new Data(3); 
+		Data tmp = new Data(numberOfStones); 
 		tmp.isPlayerA = this.isPlayerA;
 		Collections.copy(tmp.board, board);
 		return tmp;

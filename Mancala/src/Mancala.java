@@ -1,4 +1,9 @@
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.omg.CORBA.DynAnyPackage.InvalidValue;
+
+
 
 /**
  *
@@ -11,5 +16,14 @@ public class Mancala {
      */
     public static void main(String[] args) {
         MainView v = new MainView();
+        GameLogicModel model = null;
+        try {
+             model = new GameLogicModel(4, v);
+        } catch (InvalidValue ex) {
+            Logger.getLogger(Mancala.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        v.setData(model);
+        v.setupBoard();
+        
     }
 }

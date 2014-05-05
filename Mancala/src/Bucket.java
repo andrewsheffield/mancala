@@ -47,9 +47,15 @@ public class Bucket extends JPanel {
         g2.draw(shape);
         
         g2.setPaint(Color.BLACK);
-        final Ellipse2D.Double marble = new Ellipse2D.Double(0, 20, 20, 20);
+        final Ellipse2D.Double marble = new Ellipse2D.Double(30, 20, 20, 20);
         for (int i = 0; i < numOfMarbles; i++) {
-            marble.x = (i * marble.width) + 20;
+            if (i%4 == 0) {
+                marble.y += 20;
+                marble.x = 30;
+            } else {
+                marble.x += 20;
+            }
+            
             g2.fill(marble);
             g2.draw(marble);
         }

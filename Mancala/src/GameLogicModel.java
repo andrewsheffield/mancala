@@ -13,134 +13,9 @@ public class GameLogicModel
 {
 	public int undoCounterA; 
 	public int undoCounterB; 
-
-	public static void main(String[] args) throws InvalidValue 
-	{
-		/*
-		GameLogicModel tmp = new GameLogicModel(3);
-		tmp.data.printBoard();
-		tmp.makeMove(10); 
-		tmp.data.printBoard();
-		tmp.makeMove(11); 
-		tmp.data.printBoard();
-		tmp.makeMove(0); 
-		tmp.data.printBoard();
-		tmp.makeMove(8); 
-		tmp.data.printBoard();
-		tmp.makeMove(0); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(9); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(10); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(2); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(3); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(11); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(4); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(7); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(5); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(7); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(0); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(8); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(11); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(1); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(7); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(2); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(7); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(3); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(7); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(4); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(7); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		
-		tmp.makeMove(5); 
-		tmp.data.printBoard();
-		System.out.println("checkWinState " + tmp.checkWinState());
-		System.out.println("undo counter A " + tmp.undoCounterA + " undo counter B " + tmp.undoCounterB);
-		*/
-	}
-	
 	public Data data; 
 	public Data prevoiusData;
+        private MainView view;
 	
 	/**
 	 * Builds the board using the Data class and checks for 
@@ -148,7 +23,7 @@ public class GameLogicModel
 	 * @param numOfStones
 	 * @throws InvalidValue
 	 */
-	public GameLogicModel(int numOfStones) throws InvalidValue 
+	public GameLogicModel(int numOfStones, MainView view) throws InvalidValue 
 	{
 		undoCounterA = 0;
 		undoCounterB = 0; 
@@ -156,6 +31,7 @@ public class GameLogicModel
 			throw new InvalidValue("Only 3 or 4 stones are allowed");
 		data = new Data(numOfStones);
 		prevoiusData = data;
+                this.view = view;
 	}
 	
 	/**
@@ -193,6 +69,7 @@ public class GameLogicModel
 		} else {
 			data.isPlayerA = !data.isPlayerA;
 		}
+                view.setupBoard();
 
 	}
 	/**
@@ -332,5 +209,6 @@ public class GameLogicModel
 	{
 			return 12 - endingIndex ;
 	}
+        
 	
 }
