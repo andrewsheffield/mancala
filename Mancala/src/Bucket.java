@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.RectangularShape;
 import javax.swing.JPanel;
 /**
  *
@@ -11,6 +12,9 @@ public class Bucket extends JPanel {
     private int bucketHeight;
     private boolean selected = false;
     private int numOfMarbles = 0;
+    RectangularShape shape = new Ellipse2D.Double();
+    Color primary = Color.RED;
+    Color secondary = Color.BLUE;
     
     
     public Bucket(int w, int h, int marbles) {
@@ -21,20 +25,26 @@ public class Bucket extends JPanel {
         numOfMarbles = marbles;
     }
     
+    public void setUI(MancalaUI m) {
+        shape = m.getShape();
+        primary = m.getPrimary();
+        secondary = m.getSecondary();
+    }
+    
     @Override
     public void paint(Graphics g) {
         final Graphics2D g2 = (Graphics2D) g;
         
-        final Ellipse2D.Double circle = new Ellipse2D.Double(0, 0, bucketWidth, bucketHeight);
+        shape.setFrame(0, 0, bucketWidth, bucketHeight);
         
         if (selected) {
-            g2.setPaint(Color.blue);
+            g2.setPaint(secondary);
         } else {
-            g2.setPaint(Color.red);
+            g2.setPaint(primary);
         }
         
-        g2.fill(circle);
-        g2.draw(circle);
+        g2.fill(shape);
+        g2.draw(shape);
         
         g2.setPaint(Color.BLACK);
         final Ellipse2D.Double marble = new Ellipse2D.Double(0, 20, 20, 20);

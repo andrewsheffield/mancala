@@ -47,21 +47,25 @@ public class MainView {
                 c.gridx = 0;
                 c.gridy = 0;
                 bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), 4);
+                bucket.setName("M1");
             } else if(i == 13) {
                 c.gridheight = 2;
-                c.gridy = 0;
                 c.gridx = 7;
+                c.gridy = 0;
                 bucket = new Bucket((int)(100 * SCALE), (int)(200 * SCALE), 5);
+                bucket.setName("M2");
             } else if (i > 6) {
                 c.gridheight = 1;
                 c.gridx = i - 6;
                 c.gridy = 1 ;
                 bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), 3);
+                bucket.setName("B" + (i - 6));
             } else {
                 c.gridheight = 1;
                 c.gridx = i;
                 c.gridy = 0;
                 bucket = new Bucket((int)(100 * SCALE), (int)(100 * SCALE), 2);
+                bucket.setName("A" + i);
             }
             
             
@@ -95,6 +99,8 @@ public class MainView {
 
             bucket.add(new JLabel("Testing"));
             
+            bucket.setUI(new CircleUI());
+            
             board.add(bucket, c);
             buckets.add(bucket);
             
@@ -104,6 +110,10 @@ public class MainView {
             c.gridy = 3;
             c.ipady = 10;
             board.add(currentPlayer, c);
+        }
+        
+        for (Bucket b : buckets) {
+            System.out.println(b.getName());
         }
     }
     
