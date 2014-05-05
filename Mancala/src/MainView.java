@@ -80,14 +80,6 @@ public class MainView {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    /*
-                    if (bucket.isSelected()) {
-                        resetBucketSelections();
-                    } else {
-                        resetBucketSelections();
-                        bucket.select();
-                    }
-                    */
                     try {
                         model.makeMove(Integer.parseInt(bucket.getName()));
                     } catch (InvalidValue ex) {
@@ -133,13 +125,7 @@ public class MainView {
             board.add(currentPlayer, c);
         }
     }
-    
-    private void resetBucketSelections() {
-        for (Bucket g : buckets) {
-            g.resetSelection();
-        }
-    }
-    
+
     public void runView() {
         setupBoard();
     }
