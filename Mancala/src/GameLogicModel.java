@@ -15,13 +15,14 @@ public class GameLogicModel
 	public int undoCounterB; 
 	public Data data; 
 	public Data prevoiusData;
-        private MainView view;
+	private MainView view;
 	
 	/**
 	 * Builds the board using the Data class and checks for 
 	 * the max/min number of stones to be distributed 
 	 * @param numOfStones
 	 * @throws InvalidValue
+	 * @author Gianna 
 	 */
 	public GameLogicModel(int numOfStones, MainView view) throws InvalidValue 
 	{
@@ -35,11 +36,25 @@ public class GameLogicModel
 	}
 	
 	/**
+	 * Starts a new game 
+	 * @author Gianna 
+	 */
+	public void newGame()
+	{
+		undoCounterA = 0;
+		undoCounterB = 0;
+		data = new Data(data.numberOfStones);
+		prevoiusData = data;
+		data.isPlayerA = true;
+	}
+	
+	/**
 	 * This is the main function that is used to play the game it checks 
 	 * all of the rules and will throw an exception if wrong pits are 
 	 * selected on wrong turns
 	 * @param pitIndex
 	 * @throws InvalidValue
+	 * @author udaiveer & Gianna 
 	 */
 	public void makeMove(int pitIndex) throws InvalidValue 
 	{
@@ -72,10 +87,12 @@ public class GameLogicModel
                 view.setupBoard();
 
 	}
+	
 	/**
 	 * Will revert back the the previous known turn each player 
 	 * is allows 3 undo clicks after that no matter how many 
 	 * times the undo is pressed nothing will occur. 
+	 * @author Gianna
 	 */
 	public void undo()
 	{
@@ -96,6 +113,7 @@ public class GameLogicModel
 	 * if tie return 0
 	 * if in progress returns 6969 
 	 * @return 1,0,-1, 6969 check win state of player A, none, B, in progress
+	 * @author udaiveer 
 	 */
 	public int checkWinState()
 	{
@@ -115,8 +133,9 @@ public class GameLogicModel
 	
 	/**
 	 * returns an array list in the order of display 
-	 * for player B: B6,B5,B4,B3,B2,B1 
-	 * @return arrayList on integer representing pits of B  
+	 * for player A: A6,A5,A4,A3,A2,A1 
+	 * @return arrayList on integer representing pits of A
+	 * @author Gianna 
 	 */
 	public ArrayList<Integer> getPlayerPitsA() 
 	{
@@ -126,7 +145,8 @@ public class GameLogicModel
 	/**
 	 * returns an array list in the order of display 
 	 * for player B: B6,B5,B4,B3,B2,B1 
-	 * @return arrayList on integer representing pits of B  
+	 * @return arrayList on integer representing pits of B 
+	 * @author Gianna 
 	 */
 	public ArrayList<Integer> getPlayerPitsB() 
 	{
@@ -135,6 +155,7 @@ public class GameLogicModel
 	
 	/**
 	 * @return number of stones in player A mancala 
+	 * @author Gianna
 	 */
 	public int getMancalaA()
 	{
@@ -143,6 +164,7 @@ public class GameLogicModel
 	
 	/**
 	 * @return number of stones in player B mancala 
+	 * @author Gianna
 	 */
 	public int getMancalaB()
 	{
@@ -151,7 +173,8 @@ public class GameLogicModel
 	
 	/**
 	 * Returns true if is player A turn
-	 * @return
+	 * @return boolean 
+	 * @author Gianna
 	 */
 	public boolean checkTurnPlayerA() {
 		return data.isPlayerA; 
@@ -160,7 +183,8 @@ public class GameLogicModel
 	/**
 	 * Helper Function of make move 
 	 * @param pitIndex
-	 * @return
+	 * @return boolean
+	 * @author Gianna
 	 */
 	private boolean checkIfValidMove(int pitIndex)
 	{
@@ -174,8 +198,8 @@ public class GameLogicModel
 	
 	/**
 	 * This function checks if a pit was empty and steels 
-	 * 
 	 * @param endingIndex
+	 * @author Gianna
 	 */
 	private void checkIfPitWasEmpty(int endingIndex) 
 	{
@@ -203,7 +227,8 @@ public class GameLogicModel
 	 * adjusts the index to find the corresponding index to 
 	 * steal from. 
 	 * @param endingIndex
-	 * @return
+	 * @return corresponding index
+	 * @author udaiveer
 	 */
 	private int getAdjacentIndex(int endingIndex) 
 	{

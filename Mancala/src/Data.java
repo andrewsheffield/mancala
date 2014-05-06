@@ -17,7 +17,7 @@ public class Data
 	public int SIZE = 14; 
 	public int MANCALA_INDEX_A = 13; 
 	public int MANCALA_INDEX_B = 6;
-        public int numberOfStones;
+    public int numberOfStones;
 	public boolean isPlayerA; 
 
 	/**
@@ -26,6 +26,7 @@ public class Data
 	 * GameLogicModel which only allows 3 or 4 stones
 	 * Player A always goes first. 
 	 * @param numOfStones the number of stones to be added
+	 * @author Gianna 
 	 */
 	public Data(int numOfStones)
 	{
@@ -35,10 +36,20 @@ public class Data
                 numberOfStones = numOfStones;
 	}
 	
+	/**
+	 * empty constructor 
+	 * @author udaiveer
+	 */
 	public Data() {
 		board = new ArrayList<Integer>(14);
 	}
 
+	/**
+	 * returns a deep copy of the state of the 
+	 * board. 
+	 * @return deep copy
+	 * @author udaiveer
+	 */
 	public Data DeepCopy() 
 	{
 		Data tmp = new Data(numberOfStones); 
@@ -52,6 +63,7 @@ public class Data
 	 * except for the mancalas of the players which have 
 	 * 0 stones  
 	 * @param numOfStones
+	 * @author udaiveer
 	 */
 	public void setStones(int numOfStones) 
 	{
@@ -72,6 +84,7 @@ public class Data
 	 * mancalas or if player will get extra turn. 
 	 * @param pitNumber
 	 * @return the last index the player left
+	 * @author udaiveer
 	 */
 	
 	public int move(int pitNumber) {
@@ -109,6 +122,7 @@ public class Data
 
 	/**
 	 * prints the board used for testing purposes only
+	 * @author udaiveer
 	 */
   public void printBoard()
     {
@@ -126,16 +140,32 @@ public class Data
     	System.out.println("is player A " + isPlayerA + "\n");
     }
   
+  /**
+   * 
+   * @param index
+   * @return
+   * @author udaiveer
+   */
   public int getStoneInPit(int index) 
   {
 	  return board.get(index);
   }
   
+  /**
+   * 
+   * @author udaiveer
+   * @param index
+   * @author udaiveer
+   */
   public void removeAllStonesFromPit(int index) 
   {
 	  board.set(index, 0);
   }
   
+  /**
+   * @author udaiveer
+   * @return
+   */
   public ArrayList<Integer> getPitsB()
   {
 	  ArrayList<Integer> b = new ArrayList<Integer>(); 
@@ -145,6 +175,10 @@ public class Data
 	  return b;
   }
   
+  /**
+   * @author udaiveer
+   * @return
+   */
   public ArrayList<Integer> getPitsA() 
   {
 	  ArrayList<Integer> a = new ArrayList<Integer>(); 
@@ -154,6 +188,15 @@ public class Data
 	  return a;
   }
   
+  /**
+   * If player A won returns 1
+   * if player B won returns -1
+   * if tie return 0
+   * if in progress returns 6969 
+   * @author udaiveer
+   * @return int representing state of game 
+   * @author udaiveer
+   */
   public int checkWinState() 
   {
 	  boolean prevIsZero = true;
@@ -189,6 +232,11 @@ public class Data
 	  return 0;
   }
   
+  /**
+   * Adds stones to mancala 
+   * @author udaiveer
+   * @param stones
+   */
   public void addStonesToMancala(int stones)
   {
 	  if(isPlayerA)
