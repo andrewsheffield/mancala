@@ -10,7 +10,6 @@ public class Bucket extends JPanel {
     
     private int bucketWidth;
     private int bucketHeight;
-    private boolean selected = false;
     private int numOfMarbles = 0;
     RectangularShape shape = new Ellipse2D.Double();
     Color primary = Color.RED;
@@ -37,13 +36,12 @@ public class Bucket extends JPanel {
         
         shape.setFrame(0, 0, bucketWidth, bucketHeight);
         
-        if (selected) {
-            g2.setPaint(secondary);
-        } else {
-            g2.setPaint(primary);
-        }
-        
+        g2.setColor(primary);
         g2.fill(shape);
+        
+        g2.setPaint(secondary);
+        g2.setStroke(new BasicStroke(2));
+        
         g2.draw(shape);
         
         g2.setPaint(Color.BLACK);
@@ -63,15 +61,4 @@ public class Bucket extends JPanel {
         
     }
     
-    public void select() {
-        selected = !selected;
-    }
-    
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void resetSelection() {
-        selected = false;
-    }
 }

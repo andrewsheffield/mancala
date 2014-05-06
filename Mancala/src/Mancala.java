@@ -23,7 +23,6 @@ public class Mancala {
             Logger.getLogger(Mancala.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setData(model);
-        v.setupBoard();
         
     }
 }

@@ -1,33 +1,27 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.border.Border;
 import org.omg.CORBA.DynAnyPackage.InvalidValue;
 
 public class MainView {
     
     public GameLogicModel model;
-    public final JPanel board;
-    public final JPanel window;
+    public JPanel board;
+    //public final JPanel window;
     public final double SCALE = 1.5;
-    private ArrayList<Bucket> buckets = new ArrayList<>();
     private final JLabel currentPlayer = new JLabel();
     
     public MainView() {
         
         board = new JPanel();
         board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(250 * SCALE)));
-        //setupBoard();
-        
-        window = new JPanel();
-        window.setLayout(new BorderLayout());
-       
-        window.add(board, BorderLayout.CENTER);
+        board.validate();
         
         JFrame frame =  new JFrame();
-        frame.add(window);
+        
+        frame.add(board);
+        
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -36,6 +30,7 @@ public class MainView {
 
     public void setupBoard() {
         board.removeAll();
+        board.revalidate();
         board.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -44,8 +39,7 @@ public class MainView {
         
         for (int i = 0; i < 14; i++) {
             final Bucket bucket;
-            
-            
+
             if (i == 0) {
                 c.gridheight = 2;
                 c.gridx = 0;
@@ -80,17 +74,17 @@ public class MainView {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
                     try {
                         model.makeMove(Integer.parseInt(bucket.getName()));
                     } catch (InvalidValue ex) {
                         JOptionPane.showMessageDialog(board, "Not your turn!  Calm yo Tits!");
                     }
-                    board.revalidate();
-                    board.repaint();
+                    
                 }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {}
 
                 @Override
                 public void mouseEntered(MouseEvent e) {}
@@ -98,40 +92,21 @@ public class MainView {
                 @Override
                 public void mouseExited(MouseEvent e) {}
             });
-
-            bucket.add(new JLabel("Testing"));
             
             bucket.setUI(new CircleUI());
             
             board.add(bucket, c);
-            buckets.add(bucket);
             
-            currentPlayer.removeAll();
-            if (model.checkWinState() == 1) {
-                currentPlayer.setText("Player One Wins!!!!!!!!!!!");
-            } else if (model.checkWinState() == -1) {
-                currentPlayer.setText("Player two Wins!!!!!!!!!!!");
-            }
-            else if (model.checkTurnPlayerA()) {
-                currentPlayer.setText("Player One's Turn");
-            } else {
-                currentPlayer.setText("Player Two's Turn");
-            }
-            
-            currentPlayer.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-            c.gridx = 0;
-            c.gridy = 3;
-            c.ipady = 10;
-            board.add(currentPlayer, c);
         }
-    }
-
-    public void runView() {
-        setupBoard();
+        
+        
+        board.revalidate();
+        board.repaint();
     }
 
     void setData(GameLogicModel model) {
         this.model = model;
+        setupBoard();
     }
     
 }
