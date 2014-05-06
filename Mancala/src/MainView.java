@@ -13,6 +13,7 @@ public class MainView {
     private final ButtonGroup bg1;
     private final JRadioButton three;
     private final JRadioButton four;
+    private MancalaUI userInt = new CircleUI();
     
     public MainView() {
         JFrame frame =  new JFrame();
@@ -23,6 +24,7 @@ public class MainView {
         frame.add(board, BorderLayout.CENTER);
         
         currentPlayer.setText("Player 1");
+        currentPlayer.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         frame.add(currentPlayer, BorderLayout.PAGE_END);
         
         JPanel buttons = new JPanel();
@@ -61,6 +63,27 @@ public class MainView {
         bg1.add(four);
         buttons.add(three);
         buttons.add(four);
+        
+        JButton circle = new JButton("Circle UI");
+        circle.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userInt = new CircleUI();
+                setupBoard();
+            }
+        });
+        buttons.add(circle);
+        JButton square = new JButton("Square UI");
+        square.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userInt = new SquareUI();
+                setupBoard();
+            }
+        });
+        buttons.add(square);
         
         frame.add(buttons, BorderLayout.PAGE_START);
         
@@ -124,7 +147,8 @@ public class MainView {
                     try {
                         model.makeMove(Integer.parseInt(bucket.getName()));
                     } catch (InvalidValue ex) {
-                        JOptionPane.showMessageDialog(board, "Not your turn!  Calm yo Tits!");
+                        String temp = currentPlayer.getText();
+                        currentPlayer.setText(temp.split(" ")[0] + " INVALID MOVE");
                     }
                     undo.setEnabled(true);
                     
@@ -137,7 +161,7 @@ public class MainView {
                 public void mouseExited(MouseEvent e) {}
             });
             
-            bucket.setUI(new CircleUI());
+            bucket.setUI(userInt);
             
             board.add(bucket, c);
             

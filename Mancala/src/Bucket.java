@@ -14,6 +14,7 @@ public class Bucket extends JPanel {
     RectangularShape shape = new Ellipse2D.Double();
     Color primary = Color.RED;
     Color secondary = Color.BLUE;
+    public boolean selected = false;
     
     
     public Bucket(int w, int h, int marbles) {
@@ -36,7 +37,12 @@ public class Bucket extends JPanel {
         
         shape.setFrame(0, 0, bucketWidth, bucketHeight);
         
-        g2.setColor(primary);
+        if (this.selected) {
+            g2.setColor(secondary);
+        } else {
+            g2.setColor(primary);
+        }
+        
         g2.fill(shape);
         
         g2.setPaint(secondary);
