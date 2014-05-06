@@ -18,7 +18,7 @@ public class Mancala {
         MainView v = new MainView();
         GameLogicModel model = null;
         try {
-             model = new GameLogicModel(4, v);
+             model = new GameLogicModel(3, v);
         } catch (InvalidValue ex) {
             Logger.getLogger(Mancala.class.getName()).log(Level.SEVERE, null, ex);
         }

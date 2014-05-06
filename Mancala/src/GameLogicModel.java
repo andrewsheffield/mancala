@@ -39,13 +39,15 @@ public class GameLogicModel
 	 * Starts a new game 
 	 * @author Gianna 
 	 */
-	public void newGame()
+	public void newGame(int numOfStones)
 	{
+                data.numberOfStones = numOfStones;
 		undoCounterA = 0;
 		undoCounterB = 0;
 		data = new Data(data.numberOfStones);
 		prevoiusData = data;
 		data.isPlayerA = true;
+                view.setupBoard();
 	}
 	
 	/**
@@ -105,6 +107,7 @@ public class GameLogicModel
 			undoCounterB++;
 			data = prevoiusData;
 		}
+                view.setupBoard();
 	}
 	
 	/**
@@ -234,6 +237,6 @@ public class GameLogicModel
 	{
 			return 12 - endingIndex ;
 	}
-        
+       
 	
 }

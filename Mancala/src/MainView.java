@@ -1,26 +1,69 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import org.omg.CORBA.DynAnyPackage.InvalidValue;
 
 public class MainView {
     
-    public GameLogicModel model;
-    public JPanel board;
-    //public final JPanel window;
-    public final double SCALE = 1.5;
+    private GameLogicModel model;
+    private final JPanel board;
+    private final double SCALE = 1.5;
     private final JLabel currentPlayer = new JLabel();
+    private final JButton undo;
+    private final ButtonGroup bg1;
+    private final JRadioButton three;
+    private final JRadioButton four;
     
     public MainView() {
+        JFrame frame =  new JFrame();
+        frame.setLayout(new BorderLayout());
         
         board = new JPanel();
         board.setPreferredSize(new Dimension((int)(800 * SCALE), (int)(250 * SCALE)));
-        board.validate();
+        frame.add(board, BorderLayout.CENTER);
         
-        JFrame frame =  new JFrame();
+        currentPlayer.setText("Player 1");
+        frame.add(currentPlayer, BorderLayout.PAGE_END);
         
-        frame.add(board);
+        JPanel buttons = new JPanel();
+        
+        undo = new JButton("Undo");
+        undo.setEnabled(false);
+        undo.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.undo();
+                undo.setEnabled(false);
+            }
+        });
+        buttons.add(undo);
+        
+        JButton newGame = new JButton("New Game");
+        newGame.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (three.isSelected()) {
+                    model.newGame(3);
+                } else {
+                    model.newGame(4);
+                }
+            }
+        });
+        buttons.add(newGame);
+        
+        bg1 = new ButtonGroup();
+        three = new JRadioButton("3");
+        three.setSelected(true);
+        four = new JRadioButton("4");
+        bg1.add(three);
+        bg1.add(four);
+        buttons.add(three);
+        buttons.add(four);
+        
+        frame.add(buttons, BorderLayout.PAGE_START);
+        
         
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +126,7 @@ public class MainView {
                     } catch (InvalidValue ex) {
                         JOptionPane.showMessageDialog(board, "Not your turn!  Calm yo Tits!");
                     }
+                    undo.setEnabled(true);
                     
                 }
 
@@ -99,6 +143,15 @@ public class MainView {
             
         }
         
+        if (model.checkWinState() == 1) {
+            currentPlayer .setText("Player 1 wins");
+        } else if (model.checkWinState() == -1) {
+            currentPlayer .setText("Player 2 wins");
+        } else if (model.checkTurnPlayerA()) {
+            currentPlayer.setText("Player 1");
+        } else {
+            currentPlayer.setText("Player 2");
+        }
         
         board.revalidate();
         board.repaint();
