@@ -155,13 +155,15 @@ public class MainView {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    try {
-                        model.makeMove(Integer.parseInt(bucket.getName()));
-                    } catch (InvalidValue ex) {
-                        String temp = currentPlayer.getText();
-                        currentPlayer.setText(temp.split(" ")[0] + " INVALID MOVE");
+                    if (model.checkWinState() == 6969) {
+                        try {
+                            model.makeMove(Integer.parseInt(bucket.getName()));
+                        } catch (InvalidValue ex) {
+                            String temp = currentPlayer.getText();
+                            currentPlayer.setText(temp.split(" ")[0] + " INVALID MOVE");
+                        }
+                        undo.setEnabled(true);
                     }
-                    undo.setEnabled(true);
                     
                 }
 
@@ -179,9 +181,11 @@ public class MainView {
         }
         
         if (model.checkWinState() == 1) {
-            currentPlayer .setText("Player 1 wins");
+            currentPlayer .setText("Player 1 Wins");
+            JOptionPane.showMessageDialog(board, "Player 1 Wins!!!!");
         } else if (model.checkWinState() == -1) {
             currentPlayer .setText("Player 2 wins");
+            JOptionPane.showMessageDialog(board, "Player 2 Wins!!!!");
         } else if (model.checkTurnPlayerA()) {
             currentPlayer.setText("Player 1");
         } else {
