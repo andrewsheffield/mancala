@@ -16,7 +16,7 @@ class SquareUI implements MancalaUI {
 
     @Override
     public Color getPrimary() {
-        return Color.ORANGE;
+        return Color.DARK_GRAY;
     }
 
     @Override

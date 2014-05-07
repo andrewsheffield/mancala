@@ -21,27 +21,6 @@ public class MancalaModel {
     private static int SIZE = 7;
     private int undoCounterA = 0;
     private int undoCounterB = 0;
-
-    public static void main(String[] args) throws InvalidActivityException 
-    {
-    	MancalaModel model = new MancalaModel(3); 
-    	model.printBoard();
-  
-    	System.out.println(model.isPlayerA);
-    	model.movePlayer(1, 0);
-    	model.printBoard();
-    	/*
-    	System.out.println(model.isPlayerA);
-    	model.movePlayer(0, 0);
-    	model.printBoard();
-    	System.out.println(model.isPlayerA);
-    	model.undoMove();
-    	model.printBoard();
-    	System.out.println(model.isPlayerA);
-    	model.movePlayer(1, 0);
-    	model.printBoard();
-    	*/
-    }
     
     /**
      * This function prints the representation of the current state of the 

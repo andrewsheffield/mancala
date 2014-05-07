@@ -1,3 +1,10 @@
+/**
+ * author: Andrew J Sheffield
+ * This view paints a Mancala board.  The data model updates the board when ever a change is made
+ * and the board then displays the new data.  Buttons or the board can be pressed to update content
+ * in the model.
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,7 +14,7 @@ public class MainView {
     
     private GameLogicModel model;
     private final JPanel board;
-    private final double SCALE = 1.5;
+    private final double SCALE = 1.7;
     private final JLabel currentPlayer = new JLabel();
     private final JButton undo;
     private final ButtonGroup bg1;
@@ -29,6 +36,7 @@ public class MainView {
         
         JPanel buttons = new JPanel();
         
+        //Controller
         undo = new JButton("Undo");
         undo.setEnabled(false);
         undo.addActionListener(new ActionListener() {
@@ -41,6 +49,7 @@ public class MainView {
         });
         buttons.add(undo);
         
+        //Controller
         JButton newGame = new JButton("New Game");
         newGame.addActionListener(new ActionListener() {
 
@@ -51,6 +60,7 @@ public class MainView {
                 } else {
                     model.newGame(4);
                 }
+                undo.setEnabled(false);
             }
         });
         buttons.add(newGame);
@@ -64,6 +74,7 @@ public class MainView {
         buttons.add(three);
         buttons.add(four);
         
+        //Controller
         JButton circle = new JButton("Circle UI");
         circle.addActionListener(new ActionListener() {
 
@@ -132,7 +143,7 @@ public class MainView {
                 bucket.setName((6-i) + "");
             }
             
-            
+            //Controller
             bucket.addMouseListener(new MouseListener() {
 
                 @Override

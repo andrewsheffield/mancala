@@ -9,7 +9,7 @@ import org.omg.CORBA.DynAnyPackage.InvalidValue;
  *
  * @author sheff
  */
-public class Mancala {
+public class MancalaTester {
 
     /**
      * @param args the command line arguments
@@ -20,7 +20,7 @@ public class Mancala {
         try {
              model = new GameLogicModel(3, v);
         } catch (InvalidValue ex) {
-            Logger.getLogger(Mancala.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MancalaTester.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setData(model);
         
